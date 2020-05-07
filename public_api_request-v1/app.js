@@ -10,6 +10,14 @@ fetch('https://randomuser.me/api/?results=12')
         }
     })
     .then(cards => {document.querySelector('.card').addEventListener('click', createModal)})
+    // .then(modalWindow => {
+    //     let xBtn = document.getElementById('modal-close-btn');
+    //         console.log(xBtn);
+    //         xBtn.addEventListener('click', (e) => {
+    //            modalContainer.style.display = 'none';
+    //         });
+
+    // })
     
     //.then(items => JSON.parse(items))
 
@@ -175,10 +183,5 @@ function createModal() {
 
 //event listener for close button -> reverses the modal functions or: set style.display to  none
 // let modalContainer = document.querySelector('.modal-container');
-//     let xBtn = document.getElementById('modal-close-btn');
-//     console.log(xBtn);
-//     xBtn.addEventListener('click', (e) => {
-//        modalContainer.style.display = 'none';
-//     });
-
+//
 //event listener for previous and next buttons
