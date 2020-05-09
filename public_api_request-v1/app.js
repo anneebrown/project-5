@@ -24,19 +24,20 @@ fetch('https://randomuser.me/api/?results=12')
                 data.results[j].location.street.number, data.results[j].location.street.name, data.results[j].location.state, 
                 data.results[j].location.postcode, data.results[j].dob.date.substring(0, 10));
 
-                let xBtn = document.getElementById('modal-close-btn');
-                        console.log(xBtn);
-                
-                        xBtn.addEventListener('click', (e) => {
-                           let modalContainer = document.querySelector('.modal-container');
-                           modalContainer.style.display = 'none';
-                        });
+                let xBtn = document.querySelector('.modal-close-btn');
+                console.log(xBtn.length);
+                   for(let k = 0; k <cards.length; k++){
+                   xBtn[k].addEventListener('click', (e) => {
+                   let modalContainer = document.querySelector('.modal-container');
+                   modalContainer.style.display = 'none';
+                      });
+                   }
+                        
                     
 
 
              })
 
-             
 
             }
             
