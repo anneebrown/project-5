@@ -42,6 +42,7 @@ fetch('https://randomuser.me/api/?results=12')
             
     
  })
+ 
 
 
  
@@ -90,6 +91,7 @@ inputTwo.setAttribute('class', 'search-submit');
 
 
 function createCardDiv(url, firstName, lastName, email, city, state) {
+    //creates a Div for each employee card, appends it to the dom
   const cardDiv =  document.createElement('div');
   cardDiv.setAttribute('class', 'card');
   const galleryDiv = document.querySelector('.gallery');
@@ -100,9 +102,7 @@ function createCardDiv(url, firstName, lastName, email, city, state) {
   const imageDiv = document.createElement('img');
   cardDiv.appendChild(imageDiv);
   imageDiv.setAttribute('class', 'card-img');
-  //this is where the data from the API needs to be passed in later for the picture, 
-  //needs to be changed to a variable that is passed to the function
-  //profile picture needs to be 90x90 
+  //this is where the data from the API needs is passed in later for the picture
   imageDiv.setAttribute('src', `${url}`);
   imageDiv.setAttribute('alt', 'profile picture');
 
@@ -114,19 +114,19 @@ function createCardDiv(url, firstName, lastName, email, city, state) {
   cardInfoDiv.appendChild(h3);
   h3.setAttribute('id', 'name');
   h3.setAttribute('class', 'card-name cap');
-  //textContent needs to be dynamically inserted later
+  
   h3.textContent = `${firstName} ${lastName}`;
 
   let paragraphOne = document.createElement('p');
   cardInfoDiv.appendChild(paragraphOne);
   paragraphOne.setAttribute('class', 'card-text');
-  //textContent needs to be dynamically inserted later
+  
   paragraphOne.textContent = `${email}`;
 
   let paragraphTwo = document.createElement('p');
   cardInfoDiv.appendChild(paragraphTwo);
   h3.setAttribute('class', 'card-text cap');
-  //textContent needs to be dynamically inserted later
+  
   paragraphTwo.textContent = `${city}, ${state}`;
 };
 
