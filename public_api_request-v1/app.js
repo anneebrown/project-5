@@ -1,10 +1,8 @@
-//fetch functions
+//fetch function
 //api request URL https://randomuser.me/api/?results=12
 
-
-
-
-
+let xBtnArray = []; 
+let modalContainerArray = [];
 
 // let testData; 
 
@@ -15,38 +13,41 @@ fetch('https://randomuser.me/api/?results=12')
         for (let i = 0; i < data.results.length; i++ ) {
            createCardDiv(data.results[i].picture.medium, data.results[i].name.first, data.results[i].name.last, data.results[i].email, data.results[i].location.city, data.results[i].location.state)
         }
-           let cards = document.getElementsByClassName('card')
-             console.log(cards)
-            for (let j = 0; j<cards.length; j++){
-            cards[j].addEventListener('click', (event) => {
+        let cards = document.getElementsByClassName('card')
+         console.log(cards)
+        for (let j = 0; j<cards.length; j++){
+          cards[j].addEventListener('click', (event) => {
             createModal(data.results[j].picture.large, data.results[j].name.first, data.results[j].name.last, 
-                data.results[j].email, data.results[j].location.city, data.results[j].cell, 
-                data.results[j].location.street.number, data.results[j].location.street.name, data.results[j].location.state, 
-                data.results[j].location.postcode, data.results[j].dob.date.substring(0, 10));
+             data.results[j].email, data.results[j].location.city, data.results[j].cell, 
+             data.results[j].location.street.number, data.results[j].location.street.name, data.results[j].location.state, 
+             data.results[j].location.postcode, data.results[j].dob.date.substring(0, 10));
+                })//closes the cards event listener
+                //console.log(xBtnArray)
+              }//closes the for loop
 
-                let xBtn = document.querySelector('.modal-close-btn');
-                console.log(xBtn.length);
-                   for(let k = 0; k <cards.length; k++){
-                   xBtn[k].addEventListener('click', (e) => {
-                   let modalContainer = document.querySelector('.modal-container');
-                   modalContainer.style.display = 'none';
-                      });
-                   }
-                        
-                    
-
-
-             })
-
-
-            }
-            
-    
- })
+        let xBtn = document.getElementsByTagName('.modal-close-btn')
+        xBtnArray.push(xBtn)
+        console.log(xBtnArray.length)
+        //for (let k = 0; k < 12; k ++) {
+            xBtn.addEventListener('click', () => {
+                
+                modalContainerArray.style.display = 'none';
+            })//closes xBtn event listener
+       // }//closes for loop
+    })//closes the then thing
  
 
 
- 
+   
+ //console.log(xBtn.length);
+                //    for(let k = 0; k <cards.length; k++){
+                //    let xBtn = document.querySelector('.modal-close-btn');
+                //    console.log(xBtn)
+                //    xBtn.addEventListener('click', (e) => {
+                //    let modalContainer = document.querySelector('.modal-container');
+                //    modalContainer.style.display = 'none';
+                //       });
+                //    }
 
 
         //   document.querySelector('.card').addEventListener('click', (event) => {
@@ -153,6 +154,8 @@ function createModal(url, firstName, lastName, email, city, phoneNumber, number,
     const strongTag = document.createElement('strong')
     closeBtn.appendChild(strongTag);
     strongTag.textContent = 'X';
+    xBtnArray.push(closeBtn);
+    console.log(xBtnArray);
 
     const infoContainer = document.createElement('div');
     infoContainer.setAttribute('class', 'modal-info-container');
