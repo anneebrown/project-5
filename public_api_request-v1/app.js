@@ -1,8 +1,7 @@
 //fetch function
 //api request URL https://randomuser.me/api/?results=12
 
-let xBtnArray = []; 
-let modalContainerArray = [];
+
 
 // let testData; 
 
@@ -13,55 +12,26 @@ fetch('https://randomuser.me/api/?results=12')
         for (let i = 0; i < data.results.length; i++ ) {
            createCardDiv(data.results[i].picture.medium, data.results[i].name.first, data.results[i].name.last, data.results[i].email, data.results[i].location.city, data.results[i].location.state)
         }
-        let cards = document.getElementsByClassName('card')
-         console.log(cards)
-        for (let j = 0; j<cards.length; j++){
-          cards[j].addEventListener('click', (event) => {
-            createModal(data.results[j].picture.large, data.results[j].name.first, data.results[j].name.last, 
-             data.results[j].email, data.results[j].location.city, data.results[j].cell, 
-             data.results[j].location.street.number, data.results[j].location.street.name, data.results[j].location.state, 
-             data.results[j].location.postcode, data.results[j].dob.date.substring(0, 10));
-                })//closes the cards event listener
-                //console.log(xBtnArray)
-              }//closes the for loop
+    
+         let cards = document.getElementsByClassName('card')
+//          console.log(cards)
+         for (let j = 0; j<cards.length; j++){
+           cards[j].addEventListener('click', (event) => {
+            modalDiv.style.display = 'block'
+            img.setAttribute('src', `${data.results[j].picture.large}`);
+            nameH3.textContent = `${data.results[j].name.first} ${data.results[j].name.last}`;
+            emailP.textContent = `${data.results[j].email}`
+            cityP.textContent = `${data.results[j].location.city}`
+            phoneP.textContent = `${data.results[j].cell}`
+            addressP.textContent = `${data.results[j].location.street.number} ${data.results[j].location.street.name}, ${data.results[j].location.state} ${data.results[j].location.postcode}`
+            birthdayP.textContent = `Birthday: ${data.results[j].dob.date.substring(0, 10)}`
+                 })//closes the cards event listener
+//                 //console.log(xBtnArray)
+               }//closes the for loop
 
-        let xBtn = document.getElementsByTagName('.modal-close-btn')
-        xBtnArray.push(xBtn)
-        console.log(xBtnArray.length)
-        //for (let k = 0; k < 12; k ++) {
-            xBtn.addEventListener('click', () => {
-                
-                modalContainerArray.style.display = 'none';
-            })//closes xBtn event listener
-       // }//closes for loop
+
     })//closes the then thing
- 
-
-
-   
- //console.log(xBtn.length);
-                //    for(let k = 0; k <cards.length; k++){
-                //    let xBtn = document.querySelector('.modal-close-btn');
-                //    console.log(xBtn)
-                //    xBtn.addEventListener('click', (e) => {
-                //    let modalContainer = document.querySelector('.modal-container');
-                //    modalContainer.style.display = 'none';
-                //       });
-                //    }
-
-
-        //   document.querySelector('.card').addEventListener('click', (event) => {
-        //     createModal(cards.results.medium);
-    //url, firstName, lastName, email, city, phoneNumber, number, street, state, zip, birthday
-    // .then(modalWindow => {
-    //     let xBtn = document.getElementById('modal-close-btn');
-    //         console.log(xBtn);
-    //         xBtn.addEventListener('click', (e) => {
-    //            modalContainer.style.display = 'none';
-    //         });
-
-    // })
-
+       
 
 //helper functions to create HTML
 
@@ -69,26 +39,28 @@ fetch('https://randomuser.me/api/?results=12')
 //helper functions need to be refactored later, like with a setattribute and a createelements function
 
 //creates the search container
-const searchContainer = document.querySelector('.search-container')
-const formObject = document.createElement('FORM');
-searchContainer.appendChild(formObject);
-formObject.setAttribute('action', '#');
-formObject.setAttribute('method', 'get');
-const inputOne = document.createElement('INPUT');
-const inputTwo = document.createElement('INPUT');
-formObject.appendChild(inputOne);
-formObject.appendChild(inputTwo);
-inputOne.setAttribute('type', 'search');
-inputOne.setAttribute('id', 'search-input');
-inputOne.setAttribute('class', 'search-input');
-inputOne.setAttribute('placeholder', 'Search...');
+// const searchContainer = document.querySelector('.search-container')
+// const formObject = document.createElement('FORM');
+// searchContainer.appendChild(formObject);
+// formObject.setAttribute('action', '#');
+// formObject.setAttribute('method', 'get');
+// const inputOne = document.createElement('INPUT');
+// const inputTwo = document.createElement('INPUT');
+// formObject.appendChild(inputOne);
+// formObject.appendChild(inputTwo);
+// inputOne.setAttribute('type', 'search');
+// inputOne.setAttribute('id', 'search-input');
+// inputOne.setAttribute('class', 'search-input');
+// inputOne.setAttribute('placeholder', 'Search...');
 
-inputTwo.setAttribute('type', 'submit');
-//used a different way of referring to the magnifying glass character, found here: https://www.fileformat.info/info/unicode/char/1f50d/index.htm
-inputTwo.setAttribute('value', '\uD83D\uDD0D');
-//inputTwo.setAttribute('value', '&#x1F50D;');
-inputTwo.setAttribute('id', 'search-submit');
-inputTwo.setAttribute('class', 'search-submit');
+// inputTwo.setAttribute('type', 'submit');
+// //used a different way of referring to the magnifying glass character, found here: https://www.fileformat.info/info/unicode/char/1f50d/index.htm
+// inputTwo.setAttribute('value', '\uD83D\uDD0D');
+// //inputTwo.setAttribute('value', '&#x1F50D;');
+// inputTwo.setAttribute('id', 'search-submit');
+// inputTwo.setAttribute('class', 'search-submit');
+
+
 
 
 
@@ -127,7 +99,7 @@ function createCardDiv(url, firstName, lastName, email, city, state) {
 
   let paragraphTwo = document.createElement('p');
   cardInfoDiv.appendChild(paragraphTwo);
-  h3.setAttribute('class', 'card-text cap');
+  paragraphTwo.setAttribute('class', 'card-text cap');
   
   paragraphTwo.textContent = `${city}, ${state}`;
 };
@@ -135,12 +107,11 @@ function createCardDiv(url, firstName, lastName, email, city, state) {
 //placeholder function call for testing
 //createCardDiv();
 
-//, firstName, lastName, email, city, phoneNumber, number, street, state, zip, birthday
-function createModal(url, firstName, lastName, email, city, phoneNumber, number, street, state, zip, birthday) {
-    //child of body
+
     const modalDiv = document.createElement('div');
     document.body.appendChild(modalDiv);
     modalDiv.setAttribute('class', 'modal-container');
+    modalDiv.style.display = 'none'
 
     const modalDivTwo = document.createElement('div');
     modalDivTwo.setAttribute('class', 'modal');
@@ -154,8 +125,8 @@ function createModal(url, firstName, lastName, email, city, phoneNumber, number,
     const strongTag = document.createElement('strong')
     closeBtn.appendChild(strongTag);
     strongTag.textContent = 'X';
-    xBtnArray.push(closeBtn);
-    console.log(xBtnArray);
+    // xBtnArray.push(closeBtn);
+    // console.log(xBtnArray);
 
     const infoContainer = document.createElement('div');
     infoContainer.setAttribute('class', 'modal-info-container');
@@ -166,7 +137,7 @@ function createModal(url, firstName, lastName, email, city, phoneNumber, number,
     infoContainer.appendChild(img);
     img.setAttribute('class', 'modal-img');
     //needs the url from the api
-    img.setAttribute('src', url);
+    //img.setAttribute('src', url);
     img.setAttribute('alt', 'profile picture');
 
     //h3
@@ -174,19 +145,19 @@ function createModal(url, firstName, lastName, email, city, phoneNumber, number,
     infoContainer.appendChild(nameH3);
     nameH3.setAttribute('id', 'name');
     nameH3.setAttribute('class', 'modal-name cap');
-    nameH3.textContent = `${firstName} ${lastName}`;
+    //nameH3.textContent = `${firstName} ${lastName}`;
     //nameH3.textContent = 'name';
  
     const emailP = document.createElement('p');
     infoContainer.appendChild(emailP);
     emailP.setAttribute('class', 'modal-text');
-    emailP.textContent = `${email}`;
+    //emailP.textContent = `${email}`;
     //emailP.textContent = 'email';
 
     const cityP = document.createElement('p');
     infoContainer.appendChild(cityP);
     cityP.setAttribute('class', 'modal-text cap');
-    cityP.textContent = `${city}`;
+    //cityP.textContent = `${city}`;
     //cityP.textContent = 'city';
 
     infoContainer.appendChild(document.createElement('hr'));
@@ -194,43 +165,25 @@ function createModal(url, firstName, lastName, email, city, phoneNumber, number,
     const phoneP = document.createElement('p');
     infoContainer.appendChild(phoneP);
     phoneP.setAttribute('class', 'modal-text');
-    phoneP.textContent = `${phoneNumber}`;
+    //phoneP.textContent = `${phoneNumber}`;
     //phoneP.textContent = 'phoneNumber';
 
     const addressP = document.createElement('p');
     infoContainer.appendChild(addressP);
     addressP.setAttribute('class', 'modal-text');
-    addressP.textContent = `${number} ${street}, ${state} ${zip}`;
+    //addressP.textContent = `${number} ${street}, ${state} ${zip}`;
     //addressP.textContent = 'address';
 
     const birthdayP = document.createElement('p');
     infoContainer.appendChild(birthdayP);
     birthdayP.setAttribute('class', 'modal-text');
-    birthdayP.textContent = `Birthday: ${birthday}`;
+    //birthdayP.textContent = `Birthday: ${birthday}`;
     //birthdayP.textContent = 'birthday';
 
-
-}
-
-
-//modal windows: 
-/* 
     
-
-// IMPORTANT: Below is only for exceeds tasks 
-<div class="modal-btn-container">
-    <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
-    <button type="button" id="modal-next" class="modal-next btn">Next</button>
-</div>
-</div> */
 
 //event listeners
 
-//event listener on div with class card so a click anywhere on a card opens a modal window
-//-> event listener calls the modal window helper function
-
-
-//event listener for close button -> reverses the modal functions or: set style.display to  none
-// let modalContainer = document.querySelector('.modal-container');
-//
-//event listener for previous and next buttons
+closeBtn.addEventListener('click', () => {
+    modalDiv.style.display = 'none'
+})
